@@ -6,9 +6,8 @@
         type="email"
         class="form-control"
         [class.error]="
-          loginForm.controls.email.touched &&
-          (loginForm.controls.email.errors?.email ||
-            loginForm.controls.email.errors?.required)
+          getForm.email.touched &&
+          (getForm.email.errors?.email || getForm.email.errors?.required)
         "
         formControlName="email"
         placeholder="Enter email"
@@ -19,8 +18,8 @@
         <small
           class="form-text errorcode"
           *ngIf="
-            loginForm.controls.email.touched &&
-            loginForm.controls.email.errors?.required &&
+            getForm.email.touched &&
+            getForm.email.errors?.required &&
             !submitted
           "
         >
@@ -29,16 +28,13 @@
 
         <small
           class="form-text errorcode"
-          *ngIf="
-            loginForm.controls.email.touched &&
-            loginForm.controls.email.errors?.email
-          "
+          *ngIf="getForm.email.touched && getForm.email.errors?.email"
         >
           Email address not proper!
         </small>
         <small
           class="form-text errorcode"
-          *ngIf="submitted && loginForm.controls.email.errors?.required"
+          *ngIf="submitted && getForm.email.errors?.required"
         >
           This field is Required
         </small>
@@ -53,19 +49,18 @@
         formControlName="password"
         placeholder="Password"
         [class.error]="
-          loginForm.controls.password.touched &&
-          loginForm.controls.password.errors?.required
+          getForm.password.touched && getForm.password.errors?.required
         "
         required
       />
 
       <div>
-      <small
-        class="form-text errorcode"
-        *ngIf="submitted && loginForm.controls.password.errors?.required"
-      >
-        This field is Required
-      </small>
+        <small
+          class="form-text errorcode"
+          *ngIf="submitted && getForm.password.errors?.required"
+        >
+          This field is Required
+        </small>
       </div>
     </div>
     <br />

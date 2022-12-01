@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted: boolean = false;
   authSubs: any;
-  showError : Boolean = false;
+  showError: Boolean = false;
   constructor(
     private authService: AuthenticationService,
     private route: Router
@@ -26,26 +26,29 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  get getForm() {
+    return this.loginForm.controls;
+  }
   ngOnInit() {}
 
   submit() {
     this.submitted = true;
-    
+
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
       this.authSubs = this.authService
-        .login(this.loginForm.value.email, this.loginForm.value.password).subscribe((user) => {
-          if(user){
+        .login(this.loginForm.value.email, this.loginForm.value.password)
+        .subscribe((user) => {
+          if (user) {
             this.route.navigate(['/dashboard']);
-          }
-          else{
-            this.showError = true
+          } else {
+            this.showError = true;
           }
         });
-        (errorResponse) => {
-          // Login Error
-          this.showError = true
-      }
+      (errorResponse) => {
+        // Login Error
+        this.showError = true;
+      };
     }
   }
 }
